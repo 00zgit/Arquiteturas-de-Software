@@ -2,6 +2,7 @@
 Factory factory = new();
 Console.WriteLine(factory.GetAClientObject("First")); // Client does not know about the types of factory objects
 Console.WriteLine(factory.GetAClientObject("Second"));
+//$end
 
 
 public class FirstClientObject{ }
@@ -9,9 +10,9 @@ public class SecondClientObject{ }
 // Other types to be factored (client does not know about them)
 
 
-public class Factory // Factory
+public class Factory
 {
-	public ClientFactory() { }
+	public Factory() { }
 
 	public ClientObject GetAClientObject(string characteristic)
 	{
