@@ -5,7 +5,7 @@ LinuxFactory lnx = new();
 Application app = new(win);
 
 Itarget target = app.Factory.Create();
-target.DoSomething();
+target.DoSomething(); // output: "you did something at windows"
 
 public class Application
 {
