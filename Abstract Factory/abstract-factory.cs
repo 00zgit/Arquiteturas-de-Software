@@ -1,5 +1,5 @@
 //Client code (or input) somewhere
-WinFactory win = new(); 
+WindowsFactory win = new(); 
 MacFactory mac = new();
 LinuxFactory lnx = new();
 Application app = new(win);
