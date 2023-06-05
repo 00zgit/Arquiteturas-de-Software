@@ -7,7 +7,7 @@ Console.WriteLine(factory.GetAClientObject("Second"));
 
 public class FirstClientObject : IClientObject{ }
 public class SecondClientObject : IClientObject{ }
-// Other types to be factored (client does not know about them)
+// ...
 
 
 public class Factory
