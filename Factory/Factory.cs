@@ -5,16 +5,16 @@ Console.WriteLine(factory.GetAClientObject("Second"));
 //$end
 
 
-public class FirstClientObject{ }
-public class SecondClientObject{ }
-// Other types to be factored (client does not know about them)
+public class FirstClientObject : IClientObject{ }
+public class SecondClientObject : IClientObject{ }
+// ...
 
 
 public class Factory
 {
 	public Factory() { }
 
-	public ClientObject GetAClientObject(string characteristic)
+	public IClientObject GetAClientObject(string characteristic)
 	{
 		if(characteristic == "First")
 		{
@@ -26,4 +26,9 @@ public class Factory
 		}
 		//...
 	}
+}
+
+interface IClientObject
+{
+	// Setup any configuration needed
 }
