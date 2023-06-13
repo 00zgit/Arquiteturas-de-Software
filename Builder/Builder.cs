@@ -1,14 +1,14 @@
-public class Target // The intent is that this class should never change, with Properties that may vary
+class Target1 // The creation of this type of class should be hidden from client
 {
     public List<string> MyListOfProperties = new();
 
-    public JustPrintMyProperties()
+    public void JustPrintMyProperties()
     {
         // print MyListOfProperties
     }
 }
 
-public interface ITargetBuilder // The intent is to have a single interface...
+interface ITargetBuilder // The intent is to have a single interface...
 {
     void doSomething1();
     void doSomething2();
@@ -18,46 +18,72 @@ public interface ITargetBuilder // The intent is to have a single interface...
     //to infinite and beyond
 }
 
-public class TargetBuilder : ITargetBuilder // ... and many builders
+class TargetBuilder1 : ITargetBuilder // ... and many builders ...
 {
-    public Target Target = new();
+    public Target1 Target = new();
 
     public void doSomething1()
     {
-        Target.MyListOfProperties.Add("doSomething1");
+        Target1.MyListOfProperties.Add("doSomething1");
     }
     public void doSomething2()
     {
-        Target.MyListOfProperties.Add("doSomething2");
+        Target1.MyListOfProperties.Add("doSomething2");
     }
     //...
+    public void doSomething5()
+    {
+        Target1.MyListOfProperties.Add("doSomething5");
+    }
+
+    public Target1 GetResult() // ... and which one will build a different Target.
+    {
+        return this.Target;
+    }
 }
 
-public class Director
+class Director
 {
     public ITargetBuilder Builder;
 
-    public Director(ITargetBuilder target)
+    public Director(ITargetBuilder builder)
     {
-        Builder = target;
+        Builder = builder;
     }
 
-    public Target BuildATarget()
+
+    // Example:
+    public void BuildTarget1()
     {
         Builder.doSomething1();
         Builder.doSomething2();
-        return Builder;
     }
-    public Target BuildAnotherTypeOfTarget()
+    public void BuildTarget2()
     {
         Builder.doSomething2();
         Builder.doSomething5();
-        return Builder;
     }
+    // But a better solution would be a single
+    // method that implements type comparison
+    //eg.: by parameter of type string or integer.
 }
 
 
 /* Client code somewhere */
-Director d = new(new Target());
-var target = d.BuildATarget();
-target.JustPrintMyProperties();
+TargetBuilder1 b = new();
+Director d = new(b);
+
+d.BuildTarget1();
+Target1 t = b.GetResult();
+
+t.JustPrintMyProperties();
+
+// or ...
+
+TargetBuilder2 b = new();
+Director d = new(b);
+
+d.BuildTarget2();
+Target2 t = b.GetResult();
+
+t.JustPrintMyProperties();
