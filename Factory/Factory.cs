@@ -1,7 +1,7 @@
 //Client code somewhere
 Factory factory = new();
-Console.WriteLine(factory.GetAClientObject("First")); // Client does not know about the types of factory objects
-Console.WriteLine(factory.GetAClientObject("Second"));
+factory.GetAClientObject("First"); // Client does not know about the types of factory objects
+factory.GetAClientObject("Second");
 //$end
 
 
